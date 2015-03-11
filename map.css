@@ -1,0 +1,12 @@
+path {
+    fill: gold;
+    stroke: darkgrey;
+    stroke-width: .5px;
+}
+path:hover {
+    fill: darkgrey;
+}
+
+svg {
+    border : solid darkgrey 1px;
+}
