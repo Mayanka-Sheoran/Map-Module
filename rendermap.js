@@ -1,3 +1,4 @@
+var map={};
 map.rendermap = function() {
     var width = 500,
         height = 500;
