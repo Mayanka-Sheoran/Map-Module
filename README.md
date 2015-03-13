@@ -2,7 +2,8 @@
 Creates a d3 map if the user provides the requisite json for the country he/she wants. 
 Also, <script src="http://d3js.org/queue.v1.min.js"></script> , include that in your html file.
 More details up soon.. cheers!
-This is how it works:
+
+Here is how it works:
 1) bower install d3-map-module
 2) Once you have the rendermap.js file available, go to line #24, and add the name of the file (for whichever country you want)
    Ex. If you want Australia's map, you add "AUS_adm2.json"
