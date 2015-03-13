@@ -1,5 +1,5 @@
 path {
-    fill: gold;
+    
     stroke: darkgrey;
     stroke-width: .5px;
 }
@@ -9,4 +9,15 @@ path:hover {
 
 svg {
     border : solid darkgrey 1px;
+}
+.hidden {
+    display: none;
+}
+div.tooltip {
+    color: black;
+    background: gold;
+    padding: .5em;
+    border-radius: 2px;
+    opacity: 0.9;
+    position: absolute;
 }

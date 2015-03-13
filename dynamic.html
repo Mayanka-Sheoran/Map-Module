@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+var chesapeake = [-75.959, 38.250],
+    states,
+    stateBorders;
+
+var scale,
+    translate,
+    area; // minimum area threshold for simplification
+
+var clip = d3.geo.clipExtent()
+    .extent([[0, 0], [width, height]]);
+
+var simplify = d3.geo.transform({
+  point: function(x, y, z) {
+    if (z >= area) this.stream.point(x * scale + translate[0], y * scale + translate[1]);
+  }
+});
+
+var zoom = d3.behavior.zoom()
+    .size([width, height])
+    .scaleExtent([1 / (1 << 5), 1 << 2])
+    .on("zoom", zoomed);
+
+// This projection is baked into the TopoJSON file,
+// but is used here to compute the desired zoom translate.
+var projection = d3.geo.mercator()
+    .translate([0, 0])
+    .scale(4000);
+
+var canvas = d3.select("body").append("canvas")
+    .attr("width", width)
+    .attr("height", height);
+
+var context = canvas.node().getContext("2d");
+context.fillStyle = "#bbb";
+context.strokeStyle = "#fff";
+context.lineJoin = "round";
+context.lineCap = "round";
+
+var path = d3.geo.path()
+    .projection({stream: function(s) { return simplify.stream(clip.stream(s)); }})
+    .context(context);
+
+d3.json("/mbostock/raw/6252418/us-states.json", function(error, us) {
+  var point = projection(chesapeake),
+      scale = .05;
+
+  topojson.presimplify(us);
+  states = topojson.feature(us, us.objects.states);
+  stateBorders = topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; });
+
+  canvas
+      .call(zoom
+        .translate([width / 2 - point[0] * scale, height / 2 - point[1] * scale])
+        .scale(scale))
+      .call(zoom.event);
+});
+
+function zoomed(d) {
+  translate = zoom.translate();
+  scale = zoom.scale();
+  area = 1 / scale / scale;
+  context.clearRect(0, 0, width, height);
+
+  context.beginPath();
+  path(states);
+  context.fill();
+
+  context.beginPath();
+  path(stateBorders);
+  context.stroke();
+}
+
+</script>

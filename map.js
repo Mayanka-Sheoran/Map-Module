@@ -1,1 +1,1 @@
-var map={}
+var map={};
