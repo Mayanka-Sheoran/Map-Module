@@ -1,3 +1,4 @@
+
 map.util = (function() {
 
     var places = {};
@@ -13,8 +14,8 @@ map.util = (function() {
 map.rendermap = (function() {
 
 
-    var width = 1000,
-        height = 1000;
+    var width = 500,
+        height = 500;
 
     var projection = d3.geo.mercator();
 

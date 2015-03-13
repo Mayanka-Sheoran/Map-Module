@@ -1,0 +1,32 @@
+{
+  "name": "d3-map-module",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Mayanka-Sheoran/Map-Module",
+  "authors": [
+    "Mayanka Sheoran <mayanka.sheoran@gmail.com>","Gaurav Chaturvedi <gkchat10@gmail.com>"
+  ],
+  "description": "Generates a map using D3 based on the country specified",
+  "main": "rendemap.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "D3",
+    "Map",
+    "Module"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "*.json",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies":{
+    "d3":"~3.5.5",
+    "topojson": "~1.6.18"
+
+  }
+}
